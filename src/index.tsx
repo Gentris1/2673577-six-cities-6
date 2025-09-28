@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app.tsx';
+import App from './components/App/App.tsx';
 
 const rentalOffersCount = 5;
 
