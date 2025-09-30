@@ -1,4 +1,4 @@
-import PlaceCard from '../../components/PlaceCard/PlaceCard.tsx';
+import PlaceCard from '../../components/place-card/place-card.tsx';
 
 const PlaceCardType = {
   apartment: 'Apartment',
