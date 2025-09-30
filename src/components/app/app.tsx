@@ -4,9 +4,9 @@ type AppScreenProps = {
   rentalOffersCount: number;
 }
 
-function App(props: AppScreenProps) {
+function App({rentalOffersCount}: AppScreenProps) {
   return (
-    <MainScreen rentalOffersCount={props.rentalOffersCount}/>
+    <MainScreen rentalOffersCount={rentalOffersCount}/>
   );
 }
 
