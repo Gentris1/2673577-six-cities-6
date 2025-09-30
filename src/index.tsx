@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app.tsx';
-
-const rentalOffersCount = 5;
+import {rentalOffersCount} from './const.ts';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
