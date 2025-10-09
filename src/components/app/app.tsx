@@ -36,7 +36,7 @@ function App({rentalOffersCount}: AppScreenProps) {
           element={<OfferScreen/>}
         />
         <Route
-          path='*'
+          path={AppRoute.NotFound}
           element={<NotFoundScreen/>}
         />
       </Routes>

@@ -9,6 +9,7 @@ export enum AppRoute {
   Root = '/',
   Favorites = '/favorites',
   Offer = '/offer',
+  NotFound = '*'
 }
 
 export const rentalOffersCount = 5;
