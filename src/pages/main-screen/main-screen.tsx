@@ -1,12 +1,10 @@
 import PlaceCard from '../../components/place-card/place-card.tsx';
+import {Offers} from '../../offer.ts';
 
-const PlaceCardType = {
-  apartment: 'Apartment',
-  room: 'Room'
-} as const;
 
 type MainScreenProps = {
   rentalOffersCount: number;
+  offers: Offers;
 }
 
 function MainScreen(props: MainScreenProps) {
@@ -100,41 +98,7 @@ function MainScreen(props: MainScreenProps) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                <PlaceCard
-                  price={{value: 120, text: 'night'}}
-                  name='Beautiful &amp; luxurious apartment at great location'
-                  type={PlaceCardType.apartment}
-                  imageUrl='img/apartment-01.jpg'
-                  rating={4}
-                />
-                <PlaceCard
-                  price={{value: 80, text: 'night'}}
-                  name='Wood and stone place'
-                  type={PlaceCardType.room}
-                  imageUrl='img/room.jpg'
-                  rating={4}
-                />
-                <PlaceCard
-                  price={{value: 132, text: 'night'}}
-                  name='Canal View Prinsengracht'
-                  type={PlaceCardType.apartment}
-                  imageUrl='img/apartment-02.jpg'
-                  rating={4}
-                />
-                <PlaceCard
-                  price={{value: 180, text: 'night'}}
-                  name='Nice, cozy, warm big bed apartment'
-                  type={PlaceCardType.apartment}
-                  imageUrl='img/apartment-03.jpg'
-                  rating={5}
-                />
-                <PlaceCard
-                  price={{value: 80, text: 'night'}}
-                  name='Wood and stone place'
-                  type={PlaceCardType.room}
-                  imageUrl='img/room.jpg'
-                  rating={4}
-                />
+                {props.offers.map((offer) => (<PlaceCard key={offer.id} offer={offer}/>))}
               </div>
             </section>
             <div className="cities__right-section">

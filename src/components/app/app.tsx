@@ -6,18 +6,20 @@ import FavoritesScreen from '../../pages/favorites-screen/favorites-screen.tsx';
 import OfferScreen from '../../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
+import {Offers} from '../../offer.ts';
 
 type AppScreenProps = {
   rentalOffersCount: number;
+  offers: Offers;
 }
 
-function App({rentalOffersCount}: AppScreenProps) {
+function App({rentalOffersCount, offers}: AppScreenProps) {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen rentalOffersCount={rentalOffersCount}/>}
+          element={<MainScreen rentalOffersCount={rentalOffersCount} offers={offers}/>}
         />
         <Route
           path={AppRoute.Login}
