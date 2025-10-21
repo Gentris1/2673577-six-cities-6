@@ -1,5 +1,6 @@
 import {Offers} from '../../types/offer.ts';
 import {ListCitiesCards} from '../../components/list-place-cards/list-cities-cards.tsx';
+import {Link} from 'react-router-dom';
 
 
 type MainScreenProps = {
@@ -25,7 +26,9 @@ function MainScreen(props: MainScreenProps) {
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
+                    <span className="header__favorite-count">
+                      <Link to={'/favorites'}>3</Link>
+                    </span>
                   </a>
                 </li>
                 <li className="header__nav-item">

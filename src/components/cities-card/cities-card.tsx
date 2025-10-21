@@ -1,5 +1,6 @@
 import {Offer} from '../../types/offer.ts';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
 
 type CitiesCardProps = {
   offer: Offer;
@@ -46,7 +47,9 @@ function CitiesCard({offer}: CitiesCardProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.name}</a>
+          <Link to={`/offer/${offer.id}`}>
+            {offer.name}
+          </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>

@@ -1,5 +1,6 @@
 import {Offers} from '../../types/offer.ts';
 import {ListFavoritesCards} from '../../components/list-favorites-cards/list-favorites-cards.tsx';
+import {Link} from 'react-router-dom';
 
 type FavoritesScreenProps = {
   offers: Offers;
@@ -13,7 +14,9 @@ function FavoritesScreen({offers}: FavoritesScreenProps) {
           <div className="header__wrapper">
             <div className="header__left">
               <a className="header__logo-link" href="markup/main.html">
-                <img className="header__logo" src="markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                <Link to={'/'}>
+                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+                </Link>
               </a>
             </div>
             <nav className="header__nav">

@@ -1,4 +1,5 @@
 import {Offer} from '../../types/offer.ts';
+import {Link} from 'react-router-dom';
 
 type FavoritesCardProps = {
   offer: Offer;
@@ -34,7 +35,9 @@ export function FavoritesCard({offer}: FavoritesCardProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.name}</a>
+          <Link to={`/offer/${offer.id}`}>
+            {offer.name}
+          </Link>
         </h2>
         <p className="place-card__type">{offer.type}</p>
       </div>
