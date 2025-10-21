@@ -1,5 +1,5 @@
 import {Offers} from '../../types/offer.ts';
-import {ListPlaceCards} from '../../components/list-place-cards/list-place-cards.tsx';
+import {ListCitiesCards} from '../../components/list-place-cards/list-cities-cards.tsx';
 
 
 type MainScreenProps = {
@@ -97,9 +97,9 @@ function MainScreen(props: MainScreenProps) {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
-                <ListPlaceCards offers={props.offers}/>
-              </div>
+
+              <ListCitiesCards offers={props.offers}/>
+
             </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>

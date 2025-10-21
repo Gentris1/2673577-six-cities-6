@@ -1,18 +1,29 @@
 import {Offer} from '../../types/offer.ts';
+import {useState} from 'react';
 
-type PlaceCardProps = {
+type CitiesCardProps = {
   offer: Offer;
 }
 
-function PlaceCard({offer}: PlaceCardProps) {
+function CitiesCard({offer}: CitiesCardProps) {
+  const [activeOffer, setActiveOffer] = useState({
+    offer: offer
+  });
+  const handleMouseOver = () => {
+    setActiveOffer((prevState) => ({
+      ...prevState,
+      activeOffer: prevState.offer,
+    }));
+    console.log(activeOffer);
+  };
   return (
-    <article className="cities__card place-card">
+    <article className="cities__card place-card" onMouseOver={handleMouseOver}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
       <div className="cities__image-wrapper place-card__image-wrapper">
         <a href="#">
-          <img className="place-card__image" src={offer.imageUrl} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={offer.imageSrc} width="260" height="200" alt="Place image"/>
         </a>
       </div>
       <div className="place-card__info">
@@ -43,4 +54,4 @@ function PlaceCard({offer}: PlaceCardProps) {
   );
 }
 
-export default PlaceCard;
+export default CitiesCard;

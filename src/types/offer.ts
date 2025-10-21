@@ -5,10 +5,11 @@ type Price = {
 
 export type Offer = {
   id: number;
+  city: string;
   price: Price;
   name: string;
   type: string;
-  imageUrl: string;
+  imageSrc: string;
   rating: number;
 }
 export type Offers = Offer[];
