@@ -15,7 +15,6 @@ function CitiesCard({offer}: CitiesCardProps) {
       ...prevState,
       activeOffer: prevState.offer,
     }));
-    console.log(activeOffer);
   };
   return (
     <article className="cities__card place-card" onMouseOver={handleMouseOver}>
