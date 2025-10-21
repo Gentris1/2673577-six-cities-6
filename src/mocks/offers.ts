@@ -1,4 +1,4 @@
-import {Offer} from '../offer.ts';
+import {Offer} from '../types/offer.ts';
 
 const PlaceCardType = {
   apartment: 'Apartment',

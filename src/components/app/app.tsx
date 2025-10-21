@@ -6,7 +6,7 @@ import FavoritesScreen from '../../pages/favorites-screen/favorites-screen.tsx';
 import OfferScreen from '../../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
-import {Offers} from '../../offer.ts';
+import {Offers} from '../../types/offer.ts';
 
 type AppScreenProps = {
   rentalOffersCount: number;

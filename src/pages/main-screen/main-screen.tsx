@@ -1,5 +1,5 @@
-import PlaceCard from '../../components/place-card/place-card.tsx';
-import {Offers} from '../../offer.ts';
+import {Offers} from '../../types/offer.ts';
+import {ListPlaceCards} from '../../components/list-place-cards/list-place-cards.tsx';
 
 
 type MainScreenProps = {
@@ -98,7 +98,7 @@ function MainScreen(props: MainScreenProps) {
                 </ul>
               </form>
               <div className="cities__places-list places__list tabs__content">
-                {props.offers.map((offer) => (<PlaceCard key={offer.id} offer={offer}/>))}
+                <ListPlaceCards offers={props.offers}/>
               </div>
             </section>
             <div className="cities__right-section">
