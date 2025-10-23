@@ -1,6 +1,7 @@
 import {Offer} from '../../types/offer.ts';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const.ts';
 
 type CitiesCardProps = {
   offer: Offer;
@@ -46,7 +47,7 @@ function CitiesCard({offer}: CitiesCardProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>
             {offer.name}
           </Link>
         </h2>

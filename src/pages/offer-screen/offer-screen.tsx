@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 import {ReviewForm} from '../../components/review-form/review-form.tsx';
-
+import {AppRoute} from '../../const.ts';
 function OfferScreen() {
   return (
     <div className="page">
@@ -9,7 +9,7 @@ function OfferScreen() {
           <div className="header__wrapper">
             <div className="header__left">
               <a className="header__logo-link" href="markup/main.html">
-                <Link to={'/'}>
+                <Link to={AppRoute.Root}>
                   <img className="header__logo" src="markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
                 </Link>
               </a>
@@ -22,7 +22,7 @@ function OfferScreen() {
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <span className="header__favorite-count">
-                      <Link to={'/favorites'}>3</Link>
+                      <Link to={AppRoute.Favorites}>3</Link>
                     </span>
                   </a>
                 </li>

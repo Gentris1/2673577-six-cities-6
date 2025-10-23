@@ -1,5 +1,6 @@
 import {Offer} from '../../types/offer.ts';
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const.ts';
 
 type FavoritesCardProps = {
   offer: Offer;
@@ -35,7 +36,7 @@ export function FavoritesCard({offer}: FavoritesCardProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>
             {offer.name}
           </Link>
         </h2>
