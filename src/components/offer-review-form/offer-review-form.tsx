@@ -8,7 +8,7 @@ type Review = {
   dateCreated: Date;
 }
 
-export function ReviewForm(props: ReviewFormProps) {
+export function OfferReviewForm(props: ReviewFormProps) {
   const [review, setReview] = useState<Review>({
     rating: 0,
     text: '',
