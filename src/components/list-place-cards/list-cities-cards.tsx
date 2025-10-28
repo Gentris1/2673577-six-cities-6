@@ -3,13 +3,14 @@ import CitiesCard from '../cities-card/cities-card.tsx';
 
 type ListCitiesCardsProps = {
   offers: Offers;
-  handleMouseOverOffer: (offer: Offer | null) => void;
+  handleMouseOverOffer?: (offer: Offer | null) => void;
+  className: string;
 }
 
-export function ListCitiesCards({offers, handleMouseOverOffer}: ListCitiesCardsProps) {
+export function ListCitiesCards({offers, handleMouseOverOffer, className}: ListCitiesCardsProps) {
   return (
-    <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer) => (<CitiesCard key={offer.id} offer={offer} handleMouseOverOffer={handleMouseOverOffer}/>))}
-    </div>
+    <>
+      {offers.map((offer) => (<CitiesCard className={className} key={offer.id} offer={offer} sizeImg='large' handleMouseOverOffer={handleMouseOverOffer}/>))}
+    </>
   );
 }

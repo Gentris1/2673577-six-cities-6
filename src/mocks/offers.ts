@@ -8,7 +8,7 @@ const PlaceCardType = {
 export const offers: Offer[] =
   [
     {
-      id: 0,
+      id: '0',
       location: {
         city: 'Amsterdam',
         coordinate: {latitude: 52.3909553943508, longitude: 4.85309666406198}
@@ -20,7 +20,7 @@ export const offers: Offer[] =
       rating: 4
     },
     {
-      id: 1,
+      id: '1',
       location: {
         city: 'Amsterdam',
         coordinate: {latitude: 52.3609553943508, longitude: 4.85309666406198}
@@ -32,7 +32,7 @@ export const offers: Offer[] =
       rating: 4
     },
     {
-      id: 2,
+      id: '2',
       location: {
         city: 'Amsterdam',
         coordinate: {latitude: 52.3909553943508, longitude: 4.929309666406198}
@@ -44,7 +44,7 @@ export const offers: Offer[] =
       rating: 4
     },
     {
-      id: 3,
+      id: '3',
       location: {
         city: 'Amsterdam',
         coordinate: {latitude: 52.3809553943508, longitude: 4.939309666406198}
@@ -56,7 +56,7 @@ export const offers: Offer[] =
       rating: 5
     },
     {
-      id: 4,
+      id: '4',
       location: {
         city: 'Cologne',
         coordinate: {latitude: 0, longitude: 0}

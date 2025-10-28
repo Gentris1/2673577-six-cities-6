@@ -37,7 +37,7 @@ function App({rentalOffersCount, offers, reviews}: AppScreenProps) {
         />
         <Route
           path={`${AppRoute.Offer}/:id`}
-          element={<OfferScreen reviews={reviews}/>}
+          element={<OfferScreen reviews={reviews} offers={offers}/>}
         />
         <Route
           path={AppRoute.NotFound}

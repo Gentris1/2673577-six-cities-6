@@ -5,7 +5,9 @@ import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
 import 'leaflet/dist/leaflet.css';
 import {Coordinate, Offer, Offers} from '../../types/offer.ts';
 
+type ScreenMapSize = 'main' | 'offer';
 type MapProps = {
+  screen: ScreenMapSize;
   cityCoordinate: Coordinate;
   offers: Offers;
   selectedOffer: Offer | null;
@@ -23,8 +25,14 @@ const currentCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function CityMap(props: MapProps): JSX.Element {
-  const {cityCoordinate, offers, selectedOffer} = props;
+
+const sizeMap: Record<ScreenMapSize, { width: string; height: string }> = {
+  main: {width: '512px', height: '555px'},
+  offer: {width: '1144px', height: '579px'},
+};
+
+function CityMap(props: MapProps) {
+  const {cityCoordinate, offers, selectedOffer, screen} = props;
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, cityCoordinate);
@@ -53,7 +61,13 @@ function CityMap(props: MapProps): JSX.Element {
     }
   }, [map, offers, selectedOffer]);
 
-  return <div style={{height: '500px'}} ref={mapRef}></div>;
+  return (
+    <div
+      ref={mapRef}
+      style={{...sizeMap[screen], margin: '0 auto',}}
+    />
+  );
+
 }
 
 export default CityMap;

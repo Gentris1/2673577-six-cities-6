@@ -14,7 +14,7 @@ type Location = {
 }
 
 export type Offer = {
-  id: number;
+  id: string;
   location: Location;
   price: Price;
   name: string;

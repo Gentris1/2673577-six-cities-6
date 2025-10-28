@@ -1,5 +1,5 @@
 import {Offers} from '../../types/offer.ts';
-import {FavoritesCard} from '../favorites-card/favorites-card.tsx';
+import CitiesCard from '../cities-card/cities-card.tsx';
 
 type ListFavoritesCardsProps = {
   offers: Offers;
@@ -27,7 +27,7 @@ export function ListFavoritesCards({offers}: ListFavoritesCardsProps) {
           </div>
           <div className="favorites__places">
             {groupByCity[city].map((offer) => (
-              <FavoritesCard key={offer.id} offer={offer}/>
+              <CitiesCard key={offer.id} offer={offer} className={'favorites'} sizeImg='small'/>
             ))}
           </div>
         </li>

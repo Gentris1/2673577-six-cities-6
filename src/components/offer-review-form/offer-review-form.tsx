@@ -1,14 +1,12 @@
 import {useState} from 'react';
 
-type ReviewFormProps = {}
-
 type Review = {
   rating: number;
   text: string;
   dateCreated: Date;
 }
 
-export function OfferReviewForm(props: ReviewFormProps) {
+export function OfferReviewForm() {
   const [review, setReview] = useState<Review>({
     rating: 0,
     text: '',
@@ -85,6 +83,7 @@ export function OfferReviewForm(props: ReviewFormProps) {
       <textarea className="reviews__textarea form__textarea" id="review" name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         onChange={(e) => handleTextChange(e.target.value)}
+        value={review.text}
       >
       </textarea>
       <div className="reviews__button-wrapper">
