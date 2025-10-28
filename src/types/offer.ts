@@ -3,9 +3,19 @@ type Price = {
   text: string;
 }
 
+export type Coordinate = {
+  latitude: number;
+  longitude: number;
+}
+
+type Location = {
+  city: string;
+  coordinate: Coordinate;
+}
+
 export type Offer = {
   id: number;
-  city: string;
+  location: Location;
   price: Price;
   name: string;
   type: string;

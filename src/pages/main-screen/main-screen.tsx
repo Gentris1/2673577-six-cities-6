@@ -1,7 +1,10 @@
-import {Offers} from '../../types/offer.ts';
+import {Coordinate, Offer, Offers} from '../../types/offer.ts';
 import {ListCitiesCards} from '../../components/list-place-cards/list-cities-cards.tsx';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
+import {useState} from 'react';
+import {offers} from '../../mocks/offers.ts';
+import CityMap from '../../components/map/map.tsx';
 
 
 type MainScreenProps = {
@@ -10,6 +13,16 @@ type MainScreenProps = {
 }
 
 function MainScreen(props: MainScreenProps) {
+  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
+
+  const handleMouseOverOffer = (offer: Offer | null) => {
+    setActiveOffer(offer);
+  };
+
+  const amsterdamCoordinate: Coordinate = {
+    latitude: 52.374,
+    longitude: 4.88969
+  };
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -102,11 +115,13 @@ function MainScreen(props: MainScreenProps) {
                 </ul>
               </form>
 
-              <ListCitiesCards offers={props.offers}/>
+              <ListCitiesCards offers={props.offers} handleMouseOverOffer={handleMouseOverOffer}/>
 
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <CityMap cityCoordinate={amsterdamCoordinate} offers={offers} selectedOffer={activeOffer}/>
+              </section>
             </div>
           </div>
         </div>

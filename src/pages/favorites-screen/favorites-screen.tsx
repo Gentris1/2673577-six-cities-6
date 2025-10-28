@@ -46,7 +46,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps) {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
 
-            <ListFavoritesCards offers={offers.sort((a, b) => a.city.localeCompare(b.city))}/>
+            <ListFavoritesCards offers={offers.sort((a, b) => a.location.city.localeCompare(b.location.city))}/>
 
             <ul className="favorites__list">
             </ul>

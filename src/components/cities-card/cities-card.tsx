@@ -1,24 +1,15 @@
 import {Offer} from '../../types/offer.ts';
-import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoute} from '../../const.ts';
 
 type CitiesCardProps = {
   offer: Offer;
+  handleMouseOverOffer: (offer: Offer | null) => void;
 }
 
-function CitiesCard({offer}: CitiesCardProps) {
-  const [activeOffer, setActiveOffer] = useState({
-    offer: offer
-  });
-  const handleMouseOver = () => {
-    setActiveOffer((prevState) => ({
-      ...prevState,
-      activeOffer: prevState.offer,
-    }));
-  };
+function CitiesCard({offer, handleMouseOverOffer}: CitiesCardProps) {
   return (
-    <article className="cities__card place-card" onMouseOver={handleMouseOver}>
+    <article className="cities__card place-card" onMouseOver={() => handleMouseOverOffer(offer)} onMouseLeave={() => handleMouseOverOffer(null)}>
       <div className="place-card__mark">
         <span>Premium</span>
       </div>

@@ -9,7 +9,10 @@ export const offers: Offer[] =
   [
     {
       id: 0,
-      city: 'Amsterdam',
+      location: {
+        city: 'Amsterdam',
+        coordinate: {latitude: 52.3909553943508, longitude: 4.85309666406198}
+      },
       price: {value: 120, text: 'night'},
       name: 'Beautiful & luxurious apartment at great location',
       type: PlaceCardType.apartment,
@@ -18,7 +21,10 @@ export const offers: Offer[] =
     },
     {
       id: 1,
-      city: 'Amsterdam',
+      location: {
+        city: 'Amsterdam',
+        coordinate: {latitude: 52.3609553943508, longitude: 4.85309666406198}
+      },
       price: {value: 80, text: 'night'},
       name: 'Wood and stone place',
       type: PlaceCardType.room,
@@ -27,7 +33,10 @@ export const offers: Offer[] =
     },
     {
       id: 2,
-      city: 'Amsterdam',
+      location: {
+        city: 'Amsterdam',
+        coordinate: {latitude: 52.3909553943508, longitude: 4.929309666406198}
+      },
       price: {value: 132, text: 'night'},
       name: 'Canal View Prinsengracht',
       type: PlaceCardType.apartment,
@@ -36,7 +45,10 @@ export const offers: Offer[] =
     },
     {
       id: 3,
-      city: 'Amsterdam',
+      location: {
+        city: 'Amsterdam',
+        coordinate: {latitude: 52.3809553943508, longitude: 4.939309666406198}
+      },
       price: {value: 180, text: 'night'},
       name: 'Nice, cozy, warm big bed apartment',
       type: PlaceCardType.apartment,
@@ -45,7 +57,10 @@ export const offers: Offer[] =
     },
     {
       id: 4,
-      city: 'Cologne',
+      location: {
+        city: 'Cologne',
+        coordinate: {latitude: 0, longitude: 0}
+      },
       price: {value: 180, text: 'night'},
       name: 'White castle',
       type: PlaceCardType.apartment,
