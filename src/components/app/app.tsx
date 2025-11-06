@@ -7,13 +7,15 @@ import OfferScreen from '../../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
 import {Offers} from '../../types/offer.ts';
+import {Reviews} from '../../types/review.ts';
 
 type AppScreenProps = {
   rentalOffersCount: number;
   offers: Offers;
+  reviews: Reviews;
 }
 
-function App({rentalOffersCount, offers}: AppScreenProps) {
+function App({rentalOffersCount, offers, reviews}: AppScreenProps) {
   return (
     <BrowserRouter>
       <Routes>
@@ -35,7 +37,7 @@ function App({rentalOffersCount, offers}: AppScreenProps) {
         />
         <Route
           path={`${AppRoute.Offer}/:id`}
-          element={<OfferScreen/>}
+          element={<OfferScreen reviews={reviews} offers={offers}/>}
         />
         <Route
           path={AppRoute.NotFound}

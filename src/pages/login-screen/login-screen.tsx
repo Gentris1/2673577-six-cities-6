@@ -1,4 +1,5 @@
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const.ts';
 
 function LoginScreen() {
   return (
@@ -8,7 +9,7 @@ function LoginScreen() {
           <div className="header__wrapper">
             <div className="header__left">
               <a className="header__logo-link" href="markup/main.html">
-                <Link to={'/'}>
+                <Link to={AppRoute.Root}>
                   <img className="header__logo" src="markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
                 </Link>
               </a>

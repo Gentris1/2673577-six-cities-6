@@ -1,6 +1,10 @@
-import {Offers} from '../../types/offer.ts';
+import {Offer, Offers} from '../../types/offer.ts';
 import {ListCitiesCards} from '../../components/list-place-cards/list-cities-cards.tsx';
 import {Link} from 'react-router-dom';
+import {amsterdamCoordinate, AppRoute} from '../../const.ts';
+import {useState} from 'react';
+import {offers} from '../../mocks/offers.ts';
+import CityMap from '../../components/map/map.tsx';
 
 
 type MainScreenProps = {
@@ -9,6 +13,13 @@ type MainScreenProps = {
 }
 
 function MainScreen(props: MainScreenProps) {
+  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
+
+  const handleMouseOverOffer = (offer: Offer | null) => {
+    setActiveOffer(offer);
+  };
+
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -27,7 +38,7 @@ function MainScreen(props: MainScreenProps) {
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
                     <span className="header__favorite-count">
-                      <Link to={'/favorites'}>3</Link>
+                      <Link to={AppRoute.Favorites}>3</Link>
                     </span>
                   </a>
                 </li>
@@ -100,12 +111,18 @@ function MainScreen(props: MainScreenProps) {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-
-              <ListCitiesCards offers={props.offers}/>
-
+              <div className='cities__places-list places__list tabs__content'>
+                <ListCitiesCards offers={props.offers} handleMouseOverOffer={handleMouseOverOffer}
+                  className={'cities'}
+                />
+              </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <CityMap screen='main' cityCoordinate={amsterdamCoordinate} offers={offers}
+                  selectedOffer={activeOffer}
+                />
+              </section>
             </div>
           </div>
         </div>

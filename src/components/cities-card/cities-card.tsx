@@ -1,32 +1,36 @@
 import {Offer} from '../../types/offer.ts';
-import {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {AppRoute} from '../../const.ts';
 
+
+type CardImageSize = 'small' | 'large';
 type CitiesCardProps = {
   offer: Offer;
+  handleMouseOverOffer?: (offer: Offer | null) => void;
+  className: string;
+  sizeImg: CardImageSize;
 }
 
-function CitiesCard({offer}: CitiesCardProps) {
-  const [activeOffer, setActiveOffer] = useState({
-    offer: offer
-  });
-  const handleMouseOver = () => {
-    setActiveOffer((prevState) => ({
-      ...prevState,
-      activeOffer: prevState.offer,
-    }));
-  };
+
+const sizeMap: Record<CardImageSize, { width: string; height: string }> = {
+  small: {width: '150', height: '110'},
+  large: {width: '260', height: '200'},
+};
+
+function CitiesCard({offer, handleMouseOverOffer, className, sizeImg }: CitiesCardProps) {
   return (
-    <article className="cities__card place-card" onMouseOver={handleMouseOver}>
+    <article className={`${className}__card place-card`} onMouseOver={() => handleMouseOverOffer?.(offer)}
+      onMouseLeave={() => handleMouseOverOffer?.(null)}
+    >
       <div className="place-card__mark">
         <span>Premium</span>
       </div>
-      <div className="cities__image-wrapper place-card__image-wrapper">
+      <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={offer.imageSrc} width="260" height="200" alt="Place image"/>
+          <img className="place-card__image" src={offer.imageSrc} width={sizeMap[sizeImg].width} height={sizeMap[sizeImg].height} alt="Place image"/>
         </a>
       </div>
-      <div className="place-card__info">
+      <div className={className === 'favorites' ? 'favorites__card-info place-card__info' : 'place-card__info'}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.price.value}</b>
@@ -46,7 +50,7 @@ function CitiesCard({offer}: CitiesCardProps) {
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`/offer/${offer.id}`}>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>
             {offer.name}
           </Link>
         </h2>
