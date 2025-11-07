@@ -3,12 +3,11 @@ import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
 import {URL_MARKER_DEFAULT, URL_MARKER_CURRENT} from '../../const';
 import 'leaflet/dist/leaflet.css';
-import {Coordinate, Offer, Offers} from '../../types/offer.ts';
+import {Offer, Offers} from '../../types/offer.ts';
 
 type ScreenMapSize = 'main' | 'offer';
 type MapProps = {
   screen: ScreenMapSize;
-  cityCoordinate: Coordinate;
   offers: Offers;
   selectedOffer: Offer | null;
 };
@@ -32,23 +31,23 @@ const sizeMap: Record<ScreenMapSize, { width: string; height: string }> = {
 };
 
 function CityMap(props: MapProps) {
-  const {cityCoordinate, offers, selectedOffer, screen} = props;
+  const {offers, selectedOffer, screen} = props;
 
   const mapRef = useRef(null);
-  const map = useMap(mapRef, cityCoordinate);
+  const map = useMap(mapRef, selectedOffer?.city.location);
 
   useEffect(() => {
     if (map) {
       const markerLayer = layerGroup().addTo(map);
       offers.forEach((offer) => {
         const marker = new Marker({
-          lat: offer.location.coordinate.latitude,
-          lng: offer.location.coordinate.longitude
+          lat: offer.location.latitude,
+          lng: offer.location.longitude
         });
 
         marker
           .setIcon(
-            selectedOffer !== undefined && offer.name === selectedOffer?.name
+            selectedOffer !== undefined && offer.title === selectedOffer?.title
               ? currentCustomIcon
               : defaultCustomIcon
           )

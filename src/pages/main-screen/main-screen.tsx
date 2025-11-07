@@ -1,7 +1,7 @@
 import {Offer, Offers} from '../../types/offer.ts';
 import {ListCitiesCards} from '../../components/list-place-cards/list-cities-cards.tsx';
 import {Link} from 'react-router-dom';
-import {amsterdamCoordinate, AppRoute} from '../../const.ts';
+import {AppRoute} from '../../const.ts';
 import {useState} from 'react';
 import {offers} from '../../mocks/offers.ts';
 import CityMap from '../../components/map/map.tsx';
@@ -119,9 +119,7 @@ function MainScreen(props: MainScreenProps) {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <CityMap screen='main' cityCoordinate={amsterdamCoordinate} offers={offers}
-                  selectedOffer={activeOffer}
-                />
+                <CityMap screen='main' offers={offers} selectedOffer={activeOffer}/>
               </section>
             </div>
           </div>

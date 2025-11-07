@@ -1,25 +1,23 @@
-type Price = {
-  value: number;
-  text: string;
-}
-
-export type Coordinate = {
+export type Location = {
   latitude: number;
   longitude: number;
-}
-
-type Location = {
-  city: string;
-  coordinate: Coordinate;
-}
+  zoom: number;
+};
 
 export type Offer = {
   id: string;
-  location: Location;
-  price: Price;
-  name: string;
+  title: string;
   type: string;
-  imageSrc: string;
+  price: number;
+  city: {
+    name: string;
+    location: Location;
+  };
+  location: Location;
+  isFavorite: boolean;
+  isPremium: boolean;
   rating: number;
+  previewImage: string;
 }
+
 export type Offers = Offer[];

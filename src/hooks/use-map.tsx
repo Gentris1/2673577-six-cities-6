@@ -1,22 +1,22 @@
 import {useEffect, useState, MutableRefObject, useRef} from 'react';
 import {Map, TileLayer} from 'leaflet';
-import {Coordinate} from '../types/offer.ts';
+import {Location} from '../types/offer.ts';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  coordinate: Coordinate
+  coordinate: Location | undefined
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderedRef = useRef<boolean>(false);
 
   useEffect(() => {
-    if (mapRef.current !== null && !isRenderedRef.current) {
+    if (mapRef.current !== null && !isRenderedRef.current && coordinate !== undefined) {
       const instance = new Map(mapRef.current, {
         center: {
           lat: coordinate.latitude,
           lng: coordinate.longitude
         },
-        zoom: 10
+        zoom: coordinate.zoom
       });
 
       const layer = new TileLayer(
