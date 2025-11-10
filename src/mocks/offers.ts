@@ -92,5 +92,51 @@ export const offers: Offer[] = [
     isFavorite: false,
     isPremium: false,
     rating: 3.3
+  },
+  {
+    id: '83b14e15-83a1-4604-9c18-c7e93703bc7e',
+    title: 'Beautiful & luxurious apartment at great location',
+    type: 'apartment',
+    price: 291,
+    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/2.jpg',
+    city: {
+      name: 'Paris',
+      location: {
+        'latitude': 48.85661,
+        'longitude': 2.351499,
+        'zoom': 13
+      }
+    },
+    location: {
+      latitude: 48.868610000000004,
+      longitude: 2.342499,
+      zoom: 16
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 4.1
+  },
+  {
+    id: '2cd3aacb-5c6d-4737-a8e4-a9cdd38c25b8',
+    title: 'Loft Studio in the Central Area',
+    type: 'house',
+    price: 395,
+    previewImage: 'https://14.design.htmlacademy.pro/static/hotel/10.jpg',
+    city: {
+      name: 'Paris',
+      location: {
+        latitude: 48.85661,
+        longitude: 2.351499,
+        zoom: 13
+      }
+    },
+    location: {
+      latitude: 48.858610000000006,
+      longitude: 2.330499,
+      zoom: 16
+    },
+    isFavorite: false,
+    isPremium: false,
+    rating: 2.5
   }
 ];

@@ -14,11 +14,9 @@ function FavoritesScreen({offers}: FavoritesScreenProps) {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="markup/main.html">
-                <Link to={AppRoute.Root}>
-                  <img className="header__logo" src="markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </Link>
-              </a>
+              <Link to={AppRoute.Root} className="header__logo-link">
+                <img className="header__logo" src="markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
