@@ -7,7 +7,7 @@ type ListFavoritesCardsProps = {
 
 export function ListFavoritesCards({offers}: ListFavoritesCardsProps) {
   const groupByCity = offers.reduce<Record<string, Offers>>((acc, offer) => {
-    const city = offer.location.city;
+    const city = offer.city.name;
     if (acc[city] === undefined) {
       acc[city] = [];
     }

@@ -1,14 +1,14 @@
 import {Offer, Offers} from '../../types/offer.ts';
-import {ListCitiesCards} from '../../components/list-place-cards/list-cities-cards.tsx';
+import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
 import {Link} from 'react-router-dom';
-import {amsterdamCoordinate, AppRoute} from '../../const.ts';
+import {AppRoute} from '../../const.ts';
 import {useState} from 'react';
-import {offers} from '../../mocks/offers.ts';
 import CityMap from '../../components/map/map.tsx';
+import {ListCities} from '../../components/list-cities/list-cities.tsx';
+import {useAppSelector} from '../../hooks';
 
 
 type MainScreenProps = {
-  rentalOffersCount: number;
   offers: Offers;
 }
 
@@ -19,7 +19,16 @@ function MainScreen(props: MainScreenProps) {
     setActiveOffer(offer);
   };
 
-
+  const cityState = useAppSelector((state) => state.city);
+  const listOffersState = useAppSelector((state) => state.offersCity);
+  const groupByCity = props.offers.reduce<Record<string, Offers>>((acc, offer) => {
+    const city = offer.city.name;
+    if (acc[city] === undefined) {
+      acc[city] = [];
+    }
+    acc[city].push(offer);
+    return acc;
+  }, {});
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -33,14 +42,12 @@ function MainScreen(props: MainScreenProps) {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <a className="header__nav-link header__nav-link--profile" href="#">
+                  <Link to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">
-                      <Link to={AppRoute.Favorites}>3</Link>
-                    </span>
-                  </a>
+                    <span className="header__favorite-count">3</span>
+                  </Link>
                 </li>
                 <li className="header__nav-item">
                   <a className="header__nav-link" href="#">
@@ -57,45 +64,14 @@ function MainScreen(props: MainScreenProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Paris</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Cologne</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Brussels</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Hamburg</span>
-                </a>
-              </li>
-              <li className="locations__item">
-                <a className="locations__item-link tabs__item" href="#">
-                  <span>Dusseldorf</span>
-                </a>
-              </li>
-            </ul>
+            <ListCities groupByCity={groupByCity}/>
           </section>
         </div>
         <div className="cities">
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{props.rentalOffersCount} places to stay in Amsterdam</b>
+              <b className="places__found">{groupByCity[cityState] ? groupByCity[cityState].length : 0} places to stay in {cityState}</b>
               <form className="places__sorting" action="#" method="get">
                 <span className="places__sorting-caption">Sort by</span>
                 <span className="places__sorting-type" tabIndex={0}>
@@ -112,16 +88,12 @@ function MainScreen(props: MainScreenProps) {
                 </ul>
               </form>
               <div className='cities__places-list places__list tabs__content'>
-                <ListCitiesCards offers={props.offers} handleMouseOverOffer={handleMouseOverOffer}
-                  className={'cities'}
-                />
+                <ListCitiesCards offers={listOffersState} handleMouseOverOffer={handleMouseOverOffer} className={'cities'}/>
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <CityMap screen='main' cityCoordinate={amsterdamCoordinate} offers={offers}
-                  selectedOffer={activeOffer}
-                />
+                <CityMap screen='main' offers={listOffersState} selectedOffer={activeOffer}/>
               </section>
             </div>
           </div>

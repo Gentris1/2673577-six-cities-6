@@ -10,18 +10,17 @@ import {Offers} from '../../types/offer.ts';
 import {Reviews} from '../../types/review.ts';
 
 type AppScreenProps = {
-  rentalOffersCount: number;
   offers: Offers;
   reviews: Reviews;
 }
 
-function App({rentalOffersCount, offers, reviews}: AppScreenProps) {
+function App({offers, reviews}: AppScreenProps) {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen rentalOffersCount={rentalOffersCount} offers={offers}/>}
+          element={<MainScreen offers={offers}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -30,7 +29,7 @@ function App({rentalOffersCount, offers, reviews}: AppScreenProps) {
         <Route
           path={AppRoute.Favorites}
           element={
-            <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+            <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
               <FavoritesScreen offers={offers}/>
             </PrivateRoute>
           }

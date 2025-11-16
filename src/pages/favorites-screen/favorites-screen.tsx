@@ -14,11 +14,9 @@ function FavoritesScreen({offers}: FavoritesScreenProps) {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="markup/main.html">
-                <Link to={AppRoute.Root}>
-                  <img className="header__logo" src="markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-                </Link>
-              </a>
+              <Link to={AppRoute.Root} className="header__logo-link">
+                <img className="header__logo" src="markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
+              </Link>
             </div>
             <nav className="header__nav">
               <ul className="header__nav-list">
@@ -46,7 +44,7 @@ function FavoritesScreen({offers}: FavoritesScreenProps) {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
 
-            <ListFavoritesCards offers={offers.sort((a, b) => a.location.city.localeCompare(b.location.city))}/>
+            <ListFavoritesCards offers={[...offers].sort((a, b) => a.city.name.localeCompare(b.city.name))}/>
 
             <ul className="favorites__list">
             </ul>

@@ -1,11 +1,11 @@
 import {Link, useParams} from 'react-router-dom';
 import {OfferReviewForm} from '../../components/offer-review-form/offer-review-form.tsx';
-import {amsterdamCoordinate, AppRoute} from '../../const.ts';
+import {AppRoute} from '../../const.ts';
 import {OfferListReviews} from '../../components/offer-list-reviews/offer-list-reviews.tsx';
 import {Reviews} from '../../types/review.ts';
 import CityMap from '../../components/map/map.tsx';
 import {Offers} from '../../types/offer.ts';
-import {ListCitiesCards} from '../../components/list-place-cards/list-cities-cards.tsx';
+import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
 
 type OfferScreenProps = {
   reviews: Reviews;
@@ -181,7 +181,7 @@ function OfferScreen({reviews, offers}: OfferScreenProps) {
             </div>
           </div>
           <section className="offer__map map">
-            <CityMap screen='offer' cityCoordinate={amsterdamCoordinate} offers={offers} selectedOffer={currentOffer}/>
+            <CityMap screen='offer' offers={offers} selectedOffer={currentOffer}/>
           </section>
         </section>
         <div className="container">
