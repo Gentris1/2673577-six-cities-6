@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import {useEffect, useState} from 'react';
 import {fillListOffers} from '../../store/action.ts';
 import {Offers} from '../../types/offer.ts';
@@ -48,11 +49,11 @@ export function SortingOptions() {
           <use xlinkHref="#icon-arrow-select"></use>
         </svg>
       </span>
-      <ul className={`places__options places__options--custom${openedSort ? ' places__options--opened' : ''}`}>
+      <ul className={classNames('places__options', 'places__options--custom', {'places__options--opened': openedSort})}>
         {['Popular', 'Price: low to high', 'Price: high to low', 'Top rated first'].map((option) => (
           <li
             key={option}
-            className={`places__option ${selectedSort === option ? 'places__option--active' : ''}`}
+            className={classNames('places__option', {'places__option--active': selectedSort === option})}
             tabIndex={0}
             onClick={() => handleSortChange(option)}
           >
