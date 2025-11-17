@@ -1,7 +1,7 @@
-import {useAppDispatch, useAppSelector} from '../../hooks';
-import {fillListOffers} from '../../store/action.ts';
 import {useEffect, useState} from 'react';
+import {fillListOffers} from '../../store/action.ts';
 import {Offers} from '../../types/offer.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks';
 
 export function SortingOptions() {
   const listOffersState = useAppSelector((state) => state.offersCity);

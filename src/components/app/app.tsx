@@ -1,5 +1,5 @@
-import MainScreen from '../../pages/main-screen/main-screen.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import MainScreen from '../../pages/main-screen/main-screen.tsx';
 import NotFoundScreen from '../../pages/not-found-screen/not-found-screen.tsx';
 import LoginScreen from '../../pages/login-screen/login-screen.tsx';
 import FavoritesScreen from '../../pages/favorites-screen/favorites-screen.tsx';

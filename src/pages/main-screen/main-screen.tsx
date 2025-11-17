@@ -1,12 +1,12 @@
-import {Offer, Offers} from '../../types/offer.ts';
-import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
-import {Link} from 'react-router-dom';
-import {AppRoute} from '../../const.ts';
 import {useState} from 'react';
+import {Link} from 'react-router-dom';
+import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
 import CityMap from '../../components/map/map.tsx';
 import {ListCities} from '../../components/list-cities/list-cities.tsx';
-import {useAppSelector} from '../../hooks';
 import {SortingOptions} from '../../components/sorting-options/sorting-options.tsx';
+import {Offer, Offers} from '../../types/offer.ts';
+import {AppRoute} from '../../const.ts';
+import {useAppSelector} from '../../hooks';
 
 
 type MainScreenProps = {

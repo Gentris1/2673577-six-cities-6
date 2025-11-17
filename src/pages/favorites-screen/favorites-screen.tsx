@@ -1,6 +1,6 @@
-import {Offers} from '../../types/offer.ts';
-import {ListFavoritesCards} from '../../components/list-favorites-cards/list-favorites-cards.tsx';
 import {Link} from 'react-router-dom';
+import {ListFavoritesCards} from '../../components/list-favorites-cards/list-favorites-cards.tsx';
+import {Offers} from '../../types/offer.ts';
 import {AppRoute} from '../../const.ts';
 
 type FavoritesScreenProps = {
