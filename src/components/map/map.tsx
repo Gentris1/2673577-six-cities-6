@@ -1,8 +1,8 @@
 import {useRef, useEffect} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
-import 'leaflet/dist/leaflet.css';
 import {Offer, Offers} from '../../types/offer.ts';
+import 'leaflet/dist/leaflet.css';
 
 type ScreenMapSize = 'main' | 'offer';
 type MapProps = {

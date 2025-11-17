@@ -1,11 +1,11 @@
 import {Link, useParams} from 'react-router-dom';
 import {OfferReviewForm} from '../../components/offer-review-form/offer-review-form.tsx';
-import {AppRoute} from '../../const.ts';
 import {OfferListReviews} from '../../components/offer-list-reviews/offer-list-reviews.tsx';
-import {Reviews} from '../../types/review.ts';
-import CityMap from '../../components/map/map.tsx';
-import {Offers} from '../../types/offer.ts';
 import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
+import CityMap from '../../components/map/map.tsx';
+import {AppRoute} from '../../const.ts';
+import {Reviews} from '../../types/review.ts';
+import {Offers} from '../../types/offer.ts';
 
 type OfferScreenProps = {
   reviews: Reviews;
