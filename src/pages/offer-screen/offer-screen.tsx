@@ -1,13 +1,13 @@
-import {Link, useParams} from 'react-router-dom';
+import {useParams} from 'react-router-dom';
 import {OfferReviewForm} from '../../components/offer-review-form/offer-review-form.tsx';
 import {OfferListReviews} from '../../components/offer-list-reviews/offer-list-reviews.tsx';
 import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
 import CityMap from '../../components/map/map.tsx';
-import {AppRoute} from '../../const.ts';
 import {Offers} from '../../types/offer.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {useEffect} from 'react';
 import {fetchReviewAction} from '../../store/api-actions.ts';
+import {Header} from '../../components/header/header.tsx';
 
 type OfferScreenProps = {
   offers: Offers;
@@ -23,36 +23,7 @@ function OfferScreen({offers}: OfferScreenProps) {
   }, [dispatch, id]);
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <Link className="header__logo-link" to={AppRoute.Root}>
-                <img className="header__logo" src="markup/img/logo.svg" alt="6 cities logo" width="81" height="41"/>
-              </Link>
-            </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <Link to={AppRoute.Root} className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">
-                      <Link to={AppRoute.Favorites}>3</Link>
-                    </span>
-                  </Link>
-                </li>
-                <li className="header__nav-item">
-                  <Link to={AppRoute.Root} className="header__nav-link">
-                    <span className="header__signout">Sign out</span>
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-      </header>
+      <Header/>
 
       <main className="page__main page__main--offer">
         <section className="offer">
