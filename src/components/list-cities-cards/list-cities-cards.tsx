@@ -9,8 +9,6 @@ type ListCitiesCardsProps = {
 
 export function ListCitiesCards({offers, handleMouseOverOffer, className}: ListCitiesCardsProps) {
   return (
-    <>
-      {offers.map((offer) => (<CitiesCard className={className} key={offer.id} offer={offer} sizeImg='large' handleMouseOverOffer={handleMouseOverOffer}/>))}
-    </>
+    offers?.map((offer) => (<CitiesCard className={className} key={offer.id} offer={offer} sizeImg='large' handleMouseOverOffer={handleMouseOverOffer}/>))
   );
 }

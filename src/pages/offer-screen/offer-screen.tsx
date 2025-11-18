@@ -4,17 +4,23 @@ import {OfferListReviews} from '../../components/offer-list-reviews/offer-list-r
 import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
 import CityMap from '../../components/map/map.tsx';
 import {AppRoute} from '../../const.ts';
-import {Reviews} from '../../types/review.ts';
 import {Offers} from '../../types/offer.ts';
+import {useAppDispatch, useAppSelector} from '../../hooks';
+import {useEffect} from 'react';
+import {fetchReviewAction} from '../../store/api-actions.ts';
 
 type OfferScreenProps = {
-  reviews: Reviews;
   offers: Offers;
 }
 
-function OfferScreen({reviews, offers}: OfferScreenProps) {
+function OfferScreen({offers}: OfferScreenProps) {
   const {id} = useParams<{ id: string }>();
   const currentOffer = offers.find((offer) => offer.id === id) || null;
+  const reviews = useAppSelector((state) => state.reviews);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchReviewAction(id));
+  }, [dispatch, id]);
   return (
     <div className="page">
       <header className="header">

@@ -6,21 +6,16 @@ import FavoritesScreen from '../../pages/favorites-screen/favorites-screen.tsx';
 import OfferScreen from '../../pages/offer-screen/offer-screen.tsx';
 import PrivateRoute from '../private-route/private-route.tsx';
 import {AppRoute, AuthorizationStatus} from '../../const.ts';
-import {Offers} from '../../types/offer.ts';
-import {Reviews} from '../../types/review.ts';
+import {useAppSelector} from '../../hooks';
 
-type AppScreenProps = {
-  offers: Offers;
-  reviews: Reviews;
-}
-
-function App({offers, reviews}: AppScreenProps) {
+function App() {
+  const offersState = useAppSelector((state) => state.offersCity);
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen offers={offers}/>}
+          element={<MainScreen offers={offersState}/>}
         />
         <Route
           path={AppRoute.Login}
@@ -30,13 +25,13 @@ function App({offers, reviews}: AppScreenProps) {
           path={AppRoute.Favorites}
           element={
             <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-              <FavoritesScreen offers={offers}/>
+              <FavoritesScreen offers={offersState}/>
             </PrivateRoute>
           }
         />
         <Route
           path={`${AppRoute.Offer}/:id`}
-          element={<OfferScreen reviews={reviews} offers={offers}/>}
+          element={<OfferScreen offers={offersState}/>}
         />
         <Route
           path={AppRoute.NotFound}
