@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import {Offers} from '../../types/offer.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {changeCity, fillListOffers} from '../../store/action.ts';
@@ -17,9 +18,12 @@ export function ListCities(props: ListCitiesProps) {
     <ul className="locations__list tabs__list">
       {Object.keys(props.groupByCity).map((city) => (
         <li key={city} className="locations__item">
-          <a className={`locations__item-link tabs__item${cityState === city ? ' tabs__item--active' : ''}`} onClick={() => handleUserAnswer(city, props.groupByCity[city])} href="#">
+          <a className={classNames('locations__item-link', 'tabs__item', {'tabs__item--active': cityState === city,})}
+            onClick={() => handleUserAnswer(city, props.groupByCity[city])}
+            href="#"
+          >
             <span>{city}</span>
-          </a>
+          </a>;
         </li>
       ))}
     </ul>
