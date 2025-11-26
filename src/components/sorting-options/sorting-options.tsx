@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import {useEffect, useState} from 'react';
-import {fillListOffers} from '../../store/action.ts';
+import {loadOffers} from '../../store/action.ts';
 import {Offers} from '../../types/offer.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 
 export function SortingOptions() {
-  const listOffersState = useAppSelector((state) => state.offersCity);
+  const offersState = useAppSelector((state) => state.offersCity);
   const cityState = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
 
@@ -37,7 +37,7 @@ export function SortingOptions() {
   const handleSortChange = (sortType: string) => {
     setSelectedSort(sortType);
     setOpenedSort(!openedSort);
-    dispatch(fillListOffers({offersCity: sortedOffers(listOffersState, sortType)}));
+    dispatch(loadOffers({offersCity: sortedOffers(offersState, sortType)}));
   };
 
   return (

@@ -7,13 +7,14 @@ import {SortingOptions} from '../../components/sorting-options/sorting-options.t
 import {Offer, Offers} from '../../types/offer.ts';
 import {AppRoute} from '../../const.ts';
 import {useAppSelector} from '../../hooks';
+import {Spinner} from '../../components/spinner/spinner.tsx';
 
 
 type MainScreenProps = {
   offers: Offers;
 }
 
-function MainScreen(props: MainScreenProps) {
+function MainScreen({offers}: MainScreenProps) {
   const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
 
   const handleMouseOverOffer = (offer: Offer | null) => {
@@ -21,8 +22,7 @@ function MainScreen(props: MainScreenProps) {
   };
 
   const cityState = useAppSelector((state) => state.city);
-  const listOffersState = useAppSelector((state) => state.offersCity);
-  const groupByCity = props.offers.reduce<Record<string, Offers>>((acc, offer) => {
+  const groupByCity = offers.reduce<Record<string, Offers>>((acc, offer) => {
     const city = offer.city.name;
     if (acc[city] === undefined) {
       acc[city] = [];
@@ -30,6 +30,13 @@ function MainScreen(props: MainScreenProps) {
     acc[city].push(offer);
     return acc;
   }, {});
+
+  const isOffersLoading = useAppSelector((state) => state.isOffersLoading);
+
+  if (isOffersLoading) {
+    return <Spinner/>;
+  }
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -65,7 +72,7 @@ function MainScreen(props: MainScreenProps) {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ListCities groupByCity={groupByCity}/>
+            <ListCities/>
           </section>
         </div>
         <div className="cities">
@@ -75,12 +82,12 @@ function MainScreen(props: MainScreenProps) {
               <b className="places__found">{groupByCity[cityState] ? groupByCity[cityState].length : 0} places to stay in {cityState}</b>
               <SortingOptions/>
               <div className='cities__places-list places__list tabs__content'>
-                <ListCitiesCards offers={listOffersState} handleMouseOverOffer={handleMouseOverOffer} className={'cities'}/>
+                <ListCitiesCards offers={groupByCity[cityState]} handleMouseOverOffer={handleMouseOverOffer} className={'cities'}/>
               </div>
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <CityMap screen='main' offers={listOffersState} selectedOffer={activeOffer}/>
+                <CityMap screen='main' offers={groupByCity[cityState]} selectedOffer={activeOffer}/>
               </section>
             </div>
           </div>

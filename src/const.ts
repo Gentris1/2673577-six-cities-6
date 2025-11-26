@@ -11,3 +11,18 @@ export enum AppRoute {
   Offer = '/offer',
   NotFound = '*'
 }
+export enum APIRoute {
+  Offers = '/offers',
+  Reviews = '/comments',
+  Login = '/login',
+  Logout = '/logout',
+}
+
+export const CITIES = {
+  Paris: 'Paris',
+  Cologne: 'Cologne',
+  Brussels: 'Brussels',
+  Amsterdam: 'Amsterdam',
+  Hamburg: 'Hamburg',
+  Dusseldorf: 'Dusseldorf'
+} as const;
