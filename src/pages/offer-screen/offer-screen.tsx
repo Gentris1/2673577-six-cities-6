@@ -1,11 +1,11 @@
 import {useParams} from 'react-router-dom';
+import {useEffect} from 'react';
 import {OfferReviewForm} from '../../components/offer-review-form/offer-review-form.tsx';
 import {OfferListReviews} from '../../components/offer-list-reviews/offer-list-reviews.tsx';
 import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
 import CityMap from '../../components/map/map.tsx';
 import {Offers} from '../../types/offer.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {useEffect} from 'react';
 import {fetchReviewAction} from '../../store/api-actions.ts';
 import {Header} from '../../components/header/header.tsx';
 
