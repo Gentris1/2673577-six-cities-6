@@ -4,13 +4,13 @@ import {OfferReviewForm} from '../../components/offer-review-form/offer-review-f
 import {OfferListReviews} from '../../components/offer-list-reviews/offer-list-reviews.tsx';
 import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
 import CityMap from '../../components/map/map.tsx';
-import {Offers} from '../../types/offer.ts';
+import {OfferListItems} from '../../types/offer-list-item.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchReviewAction} from '../../store/api-actions.ts';
 import {Header} from '../../components/header/header.tsx';
 
 type OfferScreenProps = {
-  offers: Offers;
+  offers: OfferListItems;
 }
 
 function OfferScreen({offers}: OfferScreenProps) {
@@ -51,9 +51,7 @@ function OfferScreen({offers}: OfferScreenProps) {
           </div>
           <div className="offer__container container">
             <div className="offer__wrapper">
-              <div className="offer__mark">
-                <span>Premium</span>
-              </div>
+              {currentOffer?.isPremium && <div className="offer__mark"><span>Premium</span></div>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
                   Beautiful &amp; luxurious studio at great location

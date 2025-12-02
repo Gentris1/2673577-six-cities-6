@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import {useEffect, useState} from 'react';
 import {loadOffers} from '../../store/action.ts';
-import {Offers} from '../../types/offer.ts';
+import {OfferListItems} from '../../types/offer-list-item.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 
 export function SortingOptions() {
@@ -12,7 +12,7 @@ export function SortingOptions() {
   const [selectedSort, setSelectedSort] = useState('Popular');
   const [openedSort, setOpenedSort] = useState(false);
 
-  const sortedOffers = (offers: Offers, sortType: string) => {
+  const sortedOffers = (offers: OfferListItems, sortType: string) => {
     const sorted = [...offers];
     switch (sortType) {
       case 'Price: low to high':

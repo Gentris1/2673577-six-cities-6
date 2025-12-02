@@ -1,12 +1,12 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {changeCity, loadOffers, loadReviews, requireAuthorization, setOffersLoadingStatus} from './action.ts';
-import {Offers} from '../types/offer.ts';
+import {OfferListItems} from '../types/offer-list-item.ts';
 import {Reviews} from '../types/review.ts';
 import {AuthorizationStatus} from '../const.ts';
 
 type InitalState = {
   city: string;
-  offersCity: Offers;
+  offersCity: OfferListItems;
   reviews: Reviews;
   isOffersLoading: boolean;
   authorizationStatus: AuthorizationStatus;

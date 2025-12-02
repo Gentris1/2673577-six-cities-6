@@ -1,12 +1,12 @@
 import {Link} from 'react-router-dom';
-import {Offer} from '../../types/offer.ts';
+import {OfferListItem} from '../../types/offer-list-item.ts';
 import {AppRoute} from '../../const.ts';
 
 
 type CardImageSize = 'small' | 'large';
 type CitiesCardProps = {
-  offer: Offer;
-  handleMouseOverOffer?: (offer: Offer | null) => void;
+  offer: OfferListItem;
+  handleMouseOverOffer?: (offer: OfferListItem | null) => void;
   className: string;
   sizeImg: CardImageSize;
 }
@@ -22,9 +22,8 @@ function CitiesCard({offer, handleMouseOverOffer, className, sizeImg }: CitiesCa
     <article className={`${className}__card place-card`} onMouseOver={() => handleMouseOverOffer?.(offer)}
       onMouseLeave={() => handleMouseOverOffer?.(null)}
     >
-      <div className="place-card__mark">
-        <span>Premium</span>
-      </div>
+      {offer.isPremium && (<div className="place-card__mark"><span>Premium</span></div>)}
+
       <div className={`${className}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
           <img className="place-card__image" src={offer.previewImage} width={sizeMap[sizeImg].width} height={sizeMap[sizeImg].height} alt="Place image"/>

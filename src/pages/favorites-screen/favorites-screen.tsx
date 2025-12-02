@@ -1,9 +1,9 @@
 import {ListFavoritesCards} from '../../components/list-favorites-cards/list-favorites-cards.tsx';
-import {Offers} from '../../types/offer.ts';
+import {OfferListItems} from '../../types/offer-list-item.ts';
 import {Header} from '../../components/header/header.tsx';
 
 type FavoritesScreenProps = {
-  offers: Offers;
+  offers: OfferListItems;
 }
 
 function FavoritesScreen({offers}: FavoritesScreenProps) {
