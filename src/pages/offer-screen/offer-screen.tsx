@@ -10,7 +10,7 @@ import {OfferListItems} from '../../types/offer-list-item.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchOfferAction, fetchOfferNeighbourhoodAction, fetchReviewAction} from '../../store/api-actions.ts';
 import {Header} from '../../components/header/header.tsx';
-import {AppRoute} from '../../const.ts';
+import {AppRoute, AuthorizationStatus} from '../../const.ts';
 
 type OfferScreenProps = {
   offers: OfferListItems;
@@ -22,6 +22,7 @@ function OfferScreen({offers}: OfferScreenProps) {
   const currentOffer = useAppSelector((state) => state.offer);
   const offerLoading = useAppSelector((state) => state.offerLoading);
   const offerError = useAppSelector((state) => state.offerError);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
   const reviews = useAppSelector((state) => state.reviews);
   const offerNeighbourhood = useAppSelector((state) => state.offerNeighborhood);
@@ -128,7 +129,7 @@ function OfferScreen({offers}: OfferScreenProps) {
                   <span className="reviews__amount">{reviews.length}</span>
                 </h2>
                 <OfferListReviews reviews={reviews}/>
-                <OfferReviewForm/>
+                {authorizationStatus === AuthorizationStatus.Auth && <OfferReviewForm offerId={currentOffer.id}/>}
               </section>
             </div>
           </div>

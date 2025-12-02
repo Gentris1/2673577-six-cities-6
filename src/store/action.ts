@@ -1,6 +1,6 @@
 import {createAction} from '@reduxjs/toolkit';
 import {OfferListItems} from '../types/offer-list-item.ts';
-import {Reviews} from '../types/review.ts';
+import {ReviewPost, Reviews} from '../types/review.ts';
 import {AppRoute, AuthorizationStatus} from '../const.ts';
 import {Offer} from '../types/offer.ts';
 
@@ -14,3 +14,4 @@ export const loadOffer = createAction<{offer: Offer}>('offers/loadOffer');
 export const loadOfferNeighborhood = createAction<{offers: OfferListItems}>('offers/loadOfferNeighborhood');
 export const setOfferLoadingStatus = createAction<boolean>('offer/loading');
 export const setOfferErrorStatus = createAction<boolean>('offer/error');
+export const addReview = createAction<ReviewPost>('offer/addReview');

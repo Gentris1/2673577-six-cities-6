@@ -1,4 +1,6 @@
-import {useState} from 'react';
+import {FormEvent, useState} from 'react';
+import {fetchReviewAction, postReviewAction} from '../../store/api-actions.ts';
+import {useAppDispatch} from '../../hooks';
 
 type Review = {
   rating: number;
@@ -6,7 +8,11 @@ type Review = {
   dateCreated: Date;
 }
 
-export function OfferReviewForm() {
+type OfferReviewFormProps = {
+  offerId: string;
+}
+
+export function OfferReviewForm({offerId} : OfferReviewFormProps) {
   const [review, setReview] = useState<Review>({
     rating: 0,
     text: '',
@@ -29,8 +35,25 @@ export function OfferReviewForm() {
     }));
   };
 
+  const dispatch = useAppDispatch();
+
+  const handleAddReview = (evt: FormEvent<HTMLFormElement>) => {
+    evt.preventDefault();
+
+    if (review.rating === 0 || review.text.length < 50) {
+      return;
+    }
+
+    dispatch(postReviewAction({
+      offerId,
+      comment: review.text,
+      rating: review.rating
+    }));
+    dispatch(fetchReviewAction(offerId));
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleAddReview}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
 

@@ -44,6 +44,17 @@ export const fetchReviewAction = createAsyncThunk<void, string | undefined, {
   },
 );
 
+export const postReviewAction = createAsyncThunk<void, {offerId: string; comment: string; rating: number}, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offer/postReview',
+  async ({offerId, comment, rating}, {extra: api}) => {
+    await api.post<UserData>(`${APIRoute.Reviews}/${offerId}`, {comment, rating});
+  },
+);
+
 export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
   dispatch: AppDispatch;
   state: State;
