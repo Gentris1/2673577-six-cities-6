@@ -7,7 +7,7 @@ import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-ca
 import CityMap from '../../components/map/map.tsx';
 import {OfferListItems} from '../../types/offer-list-item.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {fetchOfferAction, fetchReviewAction} from '../../store/api-actions.ts';
+import {fetchOfferAction, fetchOfferNeighbourhoodAction, fetchReviewAction} from '../../store/api-actions.ts';
 import {Header} from '../../components/header/header.tsx';
 
 type OfferScreenProps = {
@@ -18,10 +18,12 @@ function OfferScreen({offers}: OfferScreenProps) {
   const {id} = useParams<{ id: string }>();
   const currentOffer = useAppSelector((state) => state.offer);
   const reviews = useAppSelector((state) => state.reviews);
+  const offerNeighbourhood = useAppSelector((state) => state.offerNeighborhood);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchReviewAction(id));
     dispatch(fetchOfferAction(id));
+    dispatch(fetchOfferNeighbourhoodAction(id));
   }, [dispatch, id]);
   return (
     <div className="page">
@@ -122,7 +124,7 @@ function OfferScreen({offers}: OfferScreenProps) {
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
-              <ListCitiesCards offers={offers} className={'near-places'}/>
+              <ListCitiesCards offers={offerNeighbourhood} className={'near-places'}/>
             </div>
           </section>
         </div>

@@ -2,7 +2,7 @@ import {OfferListItem, OfferListItems} from '../../types/offer-list-item.ts';
 import CitiesCard from '../cities-card/cities-card.tsx';
 
 type ListCitiesCardsProps = {
-  offers: OfferListItems;
+  offers: OfferListItems | null;
   handleMouseOverOffer?: (offer: OfferListItem | null) => void;
   className: string;
 }

@@ -3,7 +3,15 @@ import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
 import {OfferListItems} from '../types/offer-list-item.ts';
 import {APIRoute, AppRoute, AuthorizationStatus} from '../const.ts';
-import {loadOffer, loadOffers, loadReviews, redirectToRoute, requireAuthorization, setOffersLoadingStatus} from './action.ts';
+import {
+  loadOffer,
+  loadOfferNeighborhood,
+  loadOffers,
+  loadReviews,
+  redirectToRoute,
+  requireAuthorization,
+  setOffersLoadingStatus
+} from './action.ts';
 import {Reviews} from '../types/review.ts';
 import {dropToken, saveToken} from '../services/token.ts';
 import {UserData} from '../types/user-data.ts';
@@ -45,6 +53,18 @@ export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Offer>(`${APIRoute.Offers}/${_arg}`);
     dispatch(loadOffer({offer: data}));
+  },
+);
+
+export const fetchOfferNeighbourhoodAction = createAsyncThunk<void, string | undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'offer/fetchOfferNeighbourhood',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<OfferListItems>(`${APIRoute.Offers}/${_arg}/nearby`);
+    dispatch(loadOfferNeighborhood({offers: data}));
   },
 );
 
