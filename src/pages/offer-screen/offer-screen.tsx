@@ -1,6 +1,7 @@
-import {useParams} from 'react-router-dom';
+import {Navigate, useParams} from 'react-router-dom';
 import {useEffect} from 'react';
 import classNames from 'classnames';
+import {ClipLoader} from 'react-spinners';
 import {OfferReviewForm} from '../../components/offer-review-form/offer-review-form.tsx';
 import {OfferListReviews} from '../../components/offer-list-reviews/offer-list-reviews.tsx';
 import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
@@ -9,6 +10,7 @@ import {OfferListItems} from '../../types/offer-list-item.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {fetchOfferAction, fetchOfferNeighbourhoodAction, fetchReviewAction} from '../../store/api-actions.ts';
 import {Header} from '../../components/header/header.tsx';
+import {AppRoute} from '../../const.ts';
 
 type OfferScreenProps = {
   offers: OfferListItems;
@@ -16,15 +18,29 @@ type OfferScreenProps = {
 
 function OfferScreen({offers}: OfferScreenProps) {
   const {id} = useParams<{ id: string }>();
+
   const currentOffer = useAppSelector((state) => state.offer);
+  const offerLoading = useAppSelector((state) => state.offerLoading);
+  const offerError = useAppSelector((state) => state.offerError);
+
   const reviews = useAppSelector((state) => state.reviews);
   const offerNeighbourhood = useAppSelector((state) => state.offerNeighborhood);
   const dispatch = useAppDispatch();
+
   useEffect(() => {
     dispatch(fetchReviewAction(id));
     dispatch(fetchOfferAction(id));
     dispatch(fetchOfferNeighbourhoodAction(id));
   }, [dispatch, id]);
+
+  if (!offerLoading && offerError) {
+    return <Navigate to={AppRoute.NotFound} replace />;
+  }
+
+  if (offerLoading || !currentOffer) {
+    return <ClipLoader size={100} color="#4481c3" />;
+  }
+
   return (
     <div className="page">
       <Header/>

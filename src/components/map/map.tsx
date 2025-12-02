@@ -1,7 +1,7 @@
 import {useRef, useEffect} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
-import {OfferListItems} from '../../types/offer-list-item.ts';
+import {OfferListItem, OfferListItems} from '../../types/offer-list-item.ts';
 import 'leaflet/dist/leaflet.css';
 import {Offer} from '../../types/offer.ts';
 
@@ -9,7 +9,7 @@ type ScreenMapSize = 'main' | 'offer';
 type MapProps = {
   screen: ScreenMapSize;
   offers: OfferListItems;
-  selectedOffer: Offer | null;
+  selectedOffer: Offer | OfferListItem | null;
 };
 
 const defaultCustomIcon = new Icon({

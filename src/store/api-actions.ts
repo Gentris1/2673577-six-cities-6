@@ -9,7 +9,7 @@ import {
   loadOffers,
   loadReviews,
   redirectToRoute,
-  requireAuthorization,
+  requireAuthorization, setOfferErrorStatus, setOfferLoadingStatus,
   setOffersLoadingStatus
 } from './action.ts';
 import {Reviews} from '../types/review.ts';
@@ -51,8 +51,16 @@ export const fetchOfferAction = createAsyncThunk<void, string | undefined, {
 }>(
   'offer/fetchOffer',
   async (_arg, {dispatch, extra: api}) => {
-    const {data} = await api.get<Offer>(`${APIRoute.Offers}/${_arg}`);
-    dispatch(loadOffer({offer: data}));
+    try {
+      dispatch(setOfferLoadingStatus(true));
+      const {data} = await api.get<Offer>(`${APIRoute.Offers}/${_arg}`);
+      dispatch(loadOffer({offer: data}));
+      dispatch(setOfferErrorStatus(false));
+    } catch {
+      dispatch(setOfferErrorStatus(true));
+    } finally {
+      dispatch(setOfferLoadingStatus(false));
+    }
   },
 );
 

@@ -12,3 +12,5 @@ export const requireAuthorization = createAction<AuthorizationStatus>('user/requ
 export const redirectToRoute = createAction<AppRoute>('offers/redirectToRoute');
 export const loadOffer = createAction<{offer: Offer}>('offers/loadOffer');
 export const loadOfferNeighborhood = createAction<{offers: OfferListItems}>('offers/loadOfferNeighborhood');
+export const setOfferLoadingStatus = createAction<boolean>('offer/loading');
+export const setOfferErrorStatus = createAction<boolean>('offer/error');
