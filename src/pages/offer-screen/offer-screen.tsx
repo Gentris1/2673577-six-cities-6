@@ -1,12 +1,13 @@
 import {useParams} from 'react-router-dom';
 import {useEffect} from 'react';
+import classNames from 'classnames';
 import {OfferReviewForm} from '../../components/offer-review-form/offer-review-form.tsx';
 import {OfferListReviews} from '../../components/offer-list-reviews/offer-list-reviews.tsx';
 import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-cards.tsx';
 import CityMap from '../../components/map/map.tsx';
 import {OfferListItems} from '../../types/offer-list-item.ts';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {fetchReviewAction} from '../../store/api-actions.ts';
+import {fetchOfferAction, fetchReviewAction} from '../../store/api-actions.ts';
 import {Header} from '../../components/header/header.tsx';
 
 type OfferScreenProps = {
@@ -15,11 +16,12 @@ type OfferScreenProps = {
 
 function OfferScreen({offers}: OfferScreenProps) {
   const {id} = useParams<{ id: string }>();
-  const currentOffer = offers.find((offer) => offer.id === id) || null;
+  const currentOffer = useAppSelector((state) => state.offer);
   const reviews = useAppSelector((state) => state.reviews);
   const dispatch = useAppDispatch();
   useEffect(() => {
     dispatch(fetchReviewAction(id));
+    dispatch(fetchOfferAction(id));
   }, [dispatch, id]);
   return (
     <div className="page">
@@ -29,24 +31,9 @@ function OfferScreen({offers}: OfferScreenProps) {
         <section className="offer">
           <div className="offer__gallery-container container">
             <div className="offer__gallery">
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="markup/img/room.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="markup/img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="markup/img/apartment-02.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="markup/img/apartment-03.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="markup/img/studio-01.jpg" alt="Photo studio"/>
-              </div>
-              <div className="offer__image-wrapper">
-                <img className="offer__image" src="markup/img/apartment-01.jpg" alt="Photo studio"/>
-              </div>
+              {currentOffer?.images.map((image) => (
+                <div className="offer__image-wrapper" key={image}><img className="offer__image" src={image} alt="Photo studio"/>
+                </div>))}
             </div>
           </div>
           <div className="offer__container container">
@@ -54,7 +41,7 @@ function OfferScreen({offers}: OfferScreenProps) {
               {currentOffer?.isPremium && <div className="offer__mark"><span>Premium</span></div>}
               <div className="offer__name-wrapper">
                 <h1 className="offer__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {currentOffer?.title}
                 </h1>
                 <button className="offer__bookmark-button button" type="button">
                   <svg className="offer__bookmark-icon" width="31" height="33">
@@ -65,84 +52,56 @@ function OfferScreen({offers}: OfferScreenProps) {
               </div>
               <div className="offer__rating rating">
                 <div className="offer__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  {currentOffer && <span style={{width: `${currentOffer?.rating * 20}%`}}></span>}
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="offer__rating-value rating__value">4.8</span>
+                <span className="offer__rating-value rating__value">{currentOffer?.rating}</span>
               </div>
               <ul className="offer__features">
                 <li className="offer__feature offer__feature--entire">
-                  Apartment
+                  {currentOffer?.type && currentOffer.type.charAt(0).toUpperCase() + currentOffer.type.slice(1)}
                 </li>
                 <li className="offer__feature offer__feature--bedrooms">
-                  3 Bedrooms
+                  {currentOffer?.bedrooms} Bedrooms
                 </li>
                 <li className="offer__feature offer__feature--adults">
-                  Max 4 adults
+                  Max {currentOffer?.maxAdults} adults
                 </li>
               </ul>
               <div className="offer__price">
-                <b className="offer__price-value">&euro;120</b>
+                <b className="offer__price-value">&euro;{currentOffer?.price}</b>
                 <span className="offer__price-text">&nbsp;night</span>
               </div>
               <div className="offer__inside">
                 <h2 className="offer__inside-title">What&apos;s inside</h2>
                 <ul className="offer__inside-list">
-                  <li className="offer__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="offer__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Towels
-                  </li>
-                  <li className="offer__inside-item">
-                    Heating
-                  </li>
-                  <li className="offer__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="offer__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="offer__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="offer__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="offer__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="offer__inside-item">
-                    Fridge
-                  </li>
+                  {currentOffer?.goods.map((good) => (
+                    <li key={good} className="offer__inside-item">
+                      {good}
+                    </li>))}
                 </ul>
               </div>
               <div className="offer__host">
                 <h2 className="offer__host-title">Meet the host</h2>
                 <div className="offer__host-user user">
-                  <div className="offer__avatar-wrapper offer__avatar-wrapper--pro user__avatar-wrapper">
-                    <img className="offer__avatar user__avatar" src="markup/img/avatar-angelina.jpg" width="74"
-                      height="74" alt="Host avatar"
-                    />
+                  <div className={classNames(
+                    'offer__avatar-wrapper',
+                    'user__avatar-wrapper',
+                    { 'offer__avatar-wrapper--pro': currentOffer?.host.isPro }
+                  )}
+                  >
+                    <img className="offer__avatar user__avatar" src={currentOffer?.host.avatarUrl} width="74" height="74" alt="Host avatar"/>
                   </div>
                   <span className="offer__user-name">
-                    Angelina
+                    {currentOffer?.host.name}
                   </span>
                   <span className="offer__user-status">
-                    Pro
+                    {currentOffer?.host.isPro && 'Pro'}
                   </span>
                 </div>
                 <div className="offer__description">
                   <p className="offer__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                    building is green and from 18th century.
-                  </p>
-                  <p className="offer__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where
-                    the bustle of the city comes to rest in this alley flowery and colorful.
+                    {currentOffer?.description}
                   </p>
                 </div>
               </div>
