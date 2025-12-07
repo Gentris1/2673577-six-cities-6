@@ -25,7 +25,7 @@ function App() {
       <Routes>
         <Route
           path={AppRoute.Root}
-          element={<MainScreen offers={offersState}/>}
+          element={<MainScreen/>}
         />
         <Route
           path={AppRoute.Login}
