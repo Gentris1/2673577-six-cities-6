@@ -3,7 +3,7 @@ import {fetchReviewAction, postReviewAction} from '../../store/api-actions.ts';
 import {useAppDispatch} from '../../hooks';
 import ReviewTextarea from '../review-textarea/review-textarea.tsx';
 import RatingInput from '../rating-input/rating-input.tsx';
-import {addReview} from '../../store/action.ts';
+import {addReview} from '../../store/slices/reviews-data.ts';
 
 type Review = {
   rating: number;
@@ -69,7 +69,7 @@ export function OfferReviewForm({offerId} : OfferReviewFormProps) {
       rating: review.rating
     };
 
-    dispatch(addReview({ review: newReview }));
+    dispatch(addReview(newReview));
 
     setReview(INITIAL_REVIEW_STATE);
 

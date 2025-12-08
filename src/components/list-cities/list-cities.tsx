@@ -1,7 +1,7 @@
 import React, {useCallback} from 'react';
 import classNames from 'classnames';
 import {useAppDispatch, useAppSelector} from '../../hooks';
-import {changeCity} from '../../store/action.ts';
+import {changeCity} from '../../store/slices/city-process.ts';
 import {CITIES} from '../../const.ts';
 import {selectCity} from '../../store/selectors';
 
@@ -10,7 +10,7 @@ export const ListCities = React.memo(() => {
   const dispatch = useAppDispatch();
 
   const handleCityChange = useCallback((city: string) => {
-    dispatch(changeCity({city}));
+    dispatch(changeCity(city));
   }, [dispatch]);
 
   return (

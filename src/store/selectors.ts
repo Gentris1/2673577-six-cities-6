@@ -1,17 +1,25 @@
-import { createSelector } from '@reduxjs/toolkit';
-import { State } from '../types/state';
-import { OfferListItems } from '../types/offer-list-item';
+import {createSelector} from '@reduxjs/toolkit';
+import {State} from '../types/state';
+import {OfferListItems} from '../types/offer-list-item';
 
 const EMPTY_ARRAY: OfferListItems = [];
 
-export const selectCity = (state: State) => state.city;
-export const selectOffersCity = (state: State) => state.offersCity;
-export const selectOriginalOffersCity = (state: State) => state.originalOffersCity;
-export const selectIsOffersLoading = (state: State) => state.isOffersLoading;
-export const selectAuthorizationStatus = (state: State) => state.authorizationStatus;
+export const selectCity = (state: State) => state.cityProcess.city;
+
+export const selectOffers = (state: State) => state.offersData.offers;
+export const selectOriginalOffers = (state: State) => state.offersData.originalOffers;
+export const selectIsOffersLoading = (state: State) => state.offersData.isLoading;
+
+export const selectOffer = (state: State) => state.offerData.offer;
+export const selectOfferNeighborhood = (state: State) => state.offerData.neighborhood;
+export const selectIsOfferLoading = (state: State) => state.offerData.isLoading;
+export const selectOfferError = (state: State) => state.offerData.hasError;
+
+export const selectReviews = (state: State) => state.reviewsData.reviews;
+export const selectAuthorizationStatus = (state: State) => state.userProcess.authorizationStatus;
 
 export const selectOffersByCity = createSelector(
-  [selectOffersCity],
+  [selectOffers],
   (offers) => offers.reduce<Record<string, OfferListItems>>((acc, offer) => {
     const cityName = offer.city.name;
     if (!acc[cityName]) {
@@ -28,7 +36,7 @@ export const selectCurrentCityOffers = createSelector(
 );
 
 export const selectOriginalOffersByCity = createSelector(
-  [selectOriginalOffersCity],
+  [selectOriginalOffers],
   (offers) => offers.reduce<Record<string, OfferListItems>>((acc, offer) => {
     const cityName = offer.city.name;
     if (!acc[cityName]) {

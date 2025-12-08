@@ -1,10 +1,10 @@
 import React, {useState, useCallback} from 'react';
 import {useStore} from 'react-redux';
 import classNames from 'classnames';
-import {loadOffers} from '../../store/action.ts';
+import {loadOffers} from '../../store/slices/offers-data.ts';
 import {OfferListItems} from '../../types/offer-list-item.ts';
 import {useAppDispatch} from '../../hooks';
-import {selectOffersCity, selectOriginalOffersCity} from '../../store/selectors';
+import {selectOffers, selectOriginalOffers} from '../../store/selectors';
 import {State} from '../../types/state.ts';
 
 export const SortingOptions = React.memo(() => {
@@ -43,14 +43,14 @@ export const SortingOptions = React.memo(() => {
 
 
     const state = store.getState();
-    const currentOffers = selectOffersCity(state);
-    const originalOffers = selectOriginalOffersCity(state);
+    const currentOffers = selectOffers(state);
+    const originalOffers = selectOriginalOffers(state);
 
 
     if (sortType === 'Popular') {
-      dispatch(loadOffers({offersCity: originalOffers}));
+      dispatch(loadOffers(originalOffers));
     } else {
-      dispatch(loadOffers({offersCity: sortedOffers(currentOffers, sortType)}));
+      dispatch(loadOffers(sortedOffers(currentOffers, sortType)));
     }
   }, [dispatch, sortedOffers, store]);
 
