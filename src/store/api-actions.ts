@@ -7,6 +7,7 @@ import {
   loadOffer,
   loadOfferNeighborhood,
   loadOffers,
+  loadOriginalOffers,
   loadReviews,
   redirectToRoute,
   requireAuthorization, setOfferErrorStatus, setOfferLoadingStatus,
@@ -29,6 +30,7 @@ export const fetchOffersAction = createAsyncThunk<void, undefined, {
     const {data} = await api.get<OfferListItems>(APIRoute.Offers);
     dispatch(setOffersLoadingStatus(false));
     dispatch(loadOffers({ offersCity: data }));
+    dispatch(loadOriginalOffers({ offersCity: data }));
   },
 );
 

@@ -2,13 +2,11 @@ import { createSelector } from '@reduxjs/toolkit';
 import { State } from '../types/state';
 import { OfferListItems } from '../types/offer-list-item';
 
+const EMPTY_ARRAY: OfferListItems = [];
+
 export const selectCity = (state: State) => state.city;
 export const selectOffersCity = (state: State) => state.offersCity;
-export const selectOffer = (state: State) => state.offer;
-export const selectOfferLoading = (state: State) => state.offerLoading;
-export const selectOfferError = (state: State) => state.offerError;
-export const selectOfferNeighborhood = (state: State) => state.offerNeighborhood;
-export const selectReviews = (state: State) => state.reviews;
+export const selectOriginalOffersCity = (state: State) => state.originalOffersCity;
 export const selectIsOffersLoading = (state: State) => state.isOffersLoading;
 export const selectAuthorizationStatus = (state: State) => state.authorizationStatus;
 
@@ -26,11 +24,28 @@ export const selectOffersByCity = createSelector(
 
 export const selectCurrentCityOffers = createSelector(
   [selectOffersByCity, selectCity],
-  (groupedOffers, city) => groupedOffers[city] || []
+  (groupedOffers, city) => groupedOffers[city] || EMPTY_ARRAY
 );
 
-export const selectOffersCityCount = createSelector(
-  [selectCurrentCityOffers],
+export const selectOriginalOffersByCity = createSelector(
+  [selectOriginalOffersCity],
+  (offers) => offers.reduce<Record<string, OfferListItems>>((acc, offer) => {
+    const cityName = offer.city.name;
+    if (!acc[cityName]) {
+      acc[cityName] = [];
+    }
+    acc[cityName].push(offer);
+    return acc;
+  }, {})
+);
+
+export const selectCurrentCityOffersForMap = createSelector(
+  [selectOriginalOffersByCity, selectCity],
+  (groupedOffers, city) => groupedOffers[city] || EMPTY_ARRAY
+);
+
+export const selectOffersCityCountStable = createSelector(
+  [selectCurrentCityOffersForMap],
   (offers) => offers.length
 );
 
@@ -39,24 +54,5 @@ export const selectAppLoadingState = createSelector(
   (authStatus, offersLoading) => ({
     authStatus,
     offersLoading
-  })
-);
-
-export const selectOfferScreenData = createSelector(
-  [
-    selectOffer,
-    selectOfferLoading,
-    selectOfferError,
-    selectAuthorizationStatus,
-    selectReviews,
-    selectOfferNeighborhood
-  ],
-  (offer, loading, error, authStatus, reviews, neighborhood) => ({
-    currentOffer: offer,
-    offerLoading: loading,
-    offerError: error,
-    authorizationStatus: authStatus,
-    reviews,
-    offerNeighbourhood: neighborhood
   })
 );

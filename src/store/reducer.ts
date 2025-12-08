@@ -4,6 +4,7 @@ import {
   loadOffer,
   loadOfferNeighborhood,
   loadOffers,
+  loadOriginalOffers,
   loadReviews,
   requireAuthorization, setOfferErrorStatus, setOfferLoadingStatus,
   setOffersLoadingStatus
@@ -16,6 +17,7 @@ import {Offer} from '../types/offer.ts';
 type InitalState = {
   city: string;
   offersCity: OfferListItems;
+  originalOffersCity: OfferListItems;
   offer: Offer | null;
   offerLoading: boolean;
   offerError: boolean;
@@ -32,6 +34,7 @@ const initialState: InitalState = {
   offerError: false,
   offerNeighborhood: null,
   offersCity: [],
+  originalOffersCity: [],
   reviews: [],
   isOffersLoading: false,
   authorizationStatus: AuthorizationStatus.Unknown
@@ -46,6 +49,10 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadOffers, (state, action) => {
       const {offersCity} = action.payload;
       state.offersCity = offersCity;
+    })
+    .addCase(loadOriginalOffers, (state, action) => {
+      const {offersCity} = action.payload;
+      state.originalOffersCity = offersCity;
     })
     .addCase(loadReviews, (state, action) => {
       const {reviews} = action.payload;
