@@ -1,5 +1,6 @@
 import {createReducer} from '@reduxjs/toolkit';
 import {
+  addReview,
   changeCity,
   loadOffer,
   loadOfferNeighborhood,
@@ -57,6 +58,10 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(loadReviews, (state, action) => {
       const {reviews} = action.payload;
       state.reviews = reviews;
+    })
+    .addCase(addReview, (state, action) => {
+      const {review} = action.payload;
+      state.reviews = [review, ...state.reviews];
     })
     .addCase(setOffersLoadingStatus, (state, action) => {
       state.isOffersLoading = action.payload;

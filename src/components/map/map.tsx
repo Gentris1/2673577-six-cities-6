@@ -1,4 +1,4 @@
-import {useRef, useEffect, useMemo} from 'react';
+import {useRef, useEffect, useMemo, memo} from 'react';
 import {Icon, Marker, layerGroup} from 'leaflet';
 import useMap from '../../hooks/use-map';
 import {OfferListItem, OfferListItems} from '../../types/offer-list-item.ts';
@@ -29,7 +29,7 @@ const sizeMap: Record<ScreenMapSize, { width: string; height: string }> = {
   offer: {width: '1144px', height: '579px'},
 };
 
-function CityMap(props: MapProps) {
+const CityMap = memo((props: MapProps) => {
   const {offers, selectedOffer, screen} = props;
 
   const mapRef = useRef(null);
@@ -72,6 +72,21 @@ function CityMap(props: MapProps) {
       style={mapStyle}
     />
   );
-}
+}, (prevProps, nextProps) => {
+  if (prevProps.screen === 'offer' && nextProps.screen === 'offer') {
+    return (
+      prevProps.offers === nextProps.offers &&
+      prevProps.selectedOffer?.id === nextProps.selectedOffer?.id
+    );
+  }
+
+  return (
+    prevProps.screen === nextProps.screen &&
+    prevProps.offers === nextProps.offers &&
+    prevProps.selectedOffer?.id === nextProps.selectedOffer?.id
+  );
+});
+
+CityMap.displayName = 'CityMap';
 
 export default CityMap;
