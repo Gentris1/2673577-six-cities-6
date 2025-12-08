@@ -4,24 +4,24 @@ import {ListCitiesCards} from '../../components/list-cities-cards/list-cities-ca
 import CityMap from '../../components/map/map.tsx';
 import {ListCities} from '../../components/list-cities/list-cities.tsx';
 import {SortingOptions} from '../../components/sorting-options/sorting-options.tsx';
-import {Offer, Offers} from '../../types/offer.ts';
+import {OfferListItem, OfferListItems} from '../../types/offer-list-item.ts';
 import {AuthorizationStatus} from '../../const.ts';
 import {useAppSelector} from '../../hooks';
 import {Header} from '../../components/header/header.tsx';
 
 type MainScreenProps = {
-  offers: Offers;
+  offers: OfferListItems;
 }
 
 function MainScreen({offers}: MainScreenProps) {
-  const [activeOffer, setActiveOffer] = useState<Offer | null>(null);
+  const [activeOffer, setActiveOffer] = useState<OfferListItem | null>(null);
 
-  const handleMouseOverOffer = (offer: Offer | null) => {
+  const handleMouseOverOffer = (offer: OfferListItem | null) => {
     setActiveOffer(offer);
   };
 
   const cityState = useAppSelector((state) => state.city);
-  const groupByCity = offers.reduce<Record<string, Offers>>((acc, offer) => {
+  const groupByCity = offers.reduce<Record<string, OfferListItems>>((acc, offer) => {
     const city = offer.city.name;
     if (acc[city] === undefined) {
       acc[city] = [];

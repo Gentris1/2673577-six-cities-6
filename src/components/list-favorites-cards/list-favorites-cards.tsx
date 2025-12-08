@@ -1,12 +1,12 @@
-import {Offers} from '../../types/offer.ts';
+import {OfferListItems} from '../../types/offer-list-item.ts';
 import CitiesCard from '../cities-card/cities-card.tsx';
 
 type ListFavoritesCardsProps = {
-  offers: Offers;
+  offers: OfferListItems;
 }
 
 export function ListFavoritesCards({offers}: ListFavoritesCardsProps) {
-  const groupByCity = offers.reduce<Record<string, Offers>>((acc, offer) => {
+  const groupByCity = offers.reduce<Record<string, OfferListItems>>((acc, offer) => {
     const city = offer.city.name;
     if (acc[city] === undefined) {
       acc[city] = [];
